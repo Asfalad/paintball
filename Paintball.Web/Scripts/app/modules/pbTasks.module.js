@@ -1,0 +1,1 @@
+﻿angular.module('pbTasks', ['pbResources', 'pbFilters', 'pbMain']);

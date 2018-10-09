@@ -1,0 +1,40 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-xs-12">
+        <header class="page-header">
+            <div class="row">
+                <a class="btn btn-action btn-lg pull-right" href="/app/#!/company/operations/create">Создать операцию</a>
+                <h1 class="page-title">Операции</h1>
+            </div>
+        </header>
+        <div ng-hide="$ctrl.count === 0" class="row" id="operations">
+            <table class="table">
+                <thead>
+                    <tr><td>Описание</td><td>Цена</td><td>Дата</td></tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="operation in $ctrl.operations">
+                        <td>{{operation.description}}</td>
+                        <td>{{operation.price}}</td>
+                        <td>{{operation.date | date: 'dd-MM-yyyy HH:mm'}}</td>
+                        <td>
+                            <a href="/app/#!/company/operations/update/{{operation.id}}" title="Редактировать операцию"><span class="fa fa-edit"></span></a>
+                            &nbsp;
+                            <a href="/app/#!/company/operations/delete/{{operation.id}}" title="Удалить операцию"><span class="fa fa-close text-danger"></span></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-show="$ctrl.count === 0" class="row">
+            <h3>Операций нет</h3>
+        </div>
+        <div ng-hide="$ctrl.count === 0" class="center-block">
+            <ul class="pagination pagination-lg">
+                <li class="ng-class: page == $ctrl.pageNumber ? 'active' : ''" ng-repeat="page in $ctrl.getPages()"><a ng-click="$ctrl.getPage(page)">{{page}}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

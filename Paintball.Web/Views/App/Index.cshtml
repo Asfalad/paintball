@@ -1,0 +1,37 @@
+﻿@{
+    Layout = "~/Views/Shared/_AngularLayout.cshtml";
+    ViewBag.Title = "Управление";
+}
+<header id="head" class="secondary"></header>
+<div class="container main">
+    <div class="row">
+        <!-- Main content -->
+        <div class="col-xs-12 maincontent">
+            <div class="row">
+                <ul ng-show="authentication.isAuth" class="nav nav-tabs nav-justified">
+                    <li ng-show="authentication.isAuth" ng-class="accountTab ? 'active' : ''"><a ng-href="/app/#!/">Управление аккаунтом</a></li>
+                    <li ng-show="authentication.isCompanyOwner || authentication.isCompanyStaff" class="dropdown" ng-class="companyTab ? 'active' : ''" uib-dropdown>
+                        <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown" uib-dropdown-toggle>
+                            Компания <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" uib-dropdown-menu role="menu">
+                            <li><a ng-href="/app/#!/company" href="#">Главная</a></li>
+                            <li><a ng-href="/app/#!/company/storage" href="#">Склад</a></li>
+                            <li><a ng-href="/app/#!/company/playgrounds" href="#">Площадки</a></li>
+                            <li><a ng-href="/app/#!/company/gametypes" href="#">Типы игр</a></li>
+                            <li><a ng-href="/app/#!/company/games" href="#">Игры</a></li>
+                            <li><a ng-href="/app/#!/company/certificates" href="#">Сертификаты</a></li>
+                            <li><a ng-href="/app/#!/company/operations" href="#">Бухгалтерия</a></li>
+                            <li><a ng-href="/app/#!/company/users" href="#">Сотрудники</a></li>
+                        </ul>
+                    </li>
+                    <li ng-show="authentication.isCompanyOwner || authentication.isCompanyStaff" ng-class="eventTab ? 'active' : ''"><a ng-href="/app/#!/events">События</a></li>
+                    <li ng-show="authentication.isCompanyOwner || authentication.isCompanyStaff" ng-class="newsTab ? 'active' : ''"><a ng-href="/app/#!/news">Новости</a></li>
+                    <li ng-hide="authentication.isCompanyOwner || authentication.isCompanyStaff" ng-class="companyTab ? 'active' : ''"><a ng-href="/app/#!/company/create" href="#">Зарегистрировать компанию</a></li>
+                    <li ng-show="authentication.isAdmin" ng-class="adminTab ? 'active' : ''"><a ng-href="/app/#!/admin">Администрирование</a></li>
+                </ul>
+            </div>
+            <div ng-view class="view-frame"></div>
+        </div>
+    </div>
+</div>

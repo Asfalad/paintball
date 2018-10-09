@@ -1,0 +1,41 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-xs-12">
+        <header class="page-header">
+            <div class="row">
+                <a class="btn btn-action btn-lg pull-right" href="/app/#!/company/storage/create">Добавить элемент</a>
+                <h1 class="page-title">Склад</h1>
+            </div>
+        </header>
+        <div ng-hide="$ctrl.count === 0" class="row" id="storage">
+            <table class="table">
+                <thead>
+                    <tr><td>Имя</td><td>Состояние</td><td>Цена</td><td>Количество</td></tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in $ctrl.equipment">
+                        <td>{{item.name}}</td>
+                        <td>{{item.state}}</td>
+                        <td>{{item.price}}</td>
+                        <td>{{item.count}}</td>
+                        <td>
+                            <a href="/app/#!/company/storage/update/{{item.id}}" title="Редактировать оборудование"><span class="fa fa-edit"></span></a>
+                            &nbsp;
+                            <a href="/app/#!/company/storage/delete/{{item.id}}" title="Удалить оборудование"><span class="fa fa-close text-danger"></span></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-show="$ctrl.count === 0" class="row">
+            <h3>Нет оборудования</h3>
+        </div>
+        <div ng-hide="$ctrl.count === 0" class="center-block">
+            <ul class="pagination pagination-lg">
+                <li class="ng-class: page == $ctrl.pageNumber ? 'active' : ''" ng-repeat="page in $ctrl.getPages()"><a ng-click="$ctrl.getPage(page)">{{page}}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

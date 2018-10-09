@@ -1,0 +1,1 @@
+﻿angular.module('pbOperations', ['pbResources', 'pbFilters', 'pbMain']);

@@ -1,0 +1,6 @@
+{
+  "name": "myproject",
+  "dependencies": {
+    "angular-ui-bootstrap-datetimepicker": "~2.0.3"
+  }
+}

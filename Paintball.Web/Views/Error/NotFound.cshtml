@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "404 - страница не найдена";
+    ViewBag.Description = "Извините, запрашиваемая страница не найдена.";
+}
+<header id="head" class="secondary"></header>
+
+<div class="jumbotron text-center">
+    <header>
+        <h1><span aria-hidden="true" class="fa fa-exclamation-circle text-danger"></span> @ViewBag.Title</h1>
+    </header>
+    <p>@ViewBag.Description</p>
+    <a class="btn btn-primary btn-lg" href="@Url.RouteUrl(HomeControllerRoute.GetIndex)"><span aria-hidden="true" class="fa fa-home"></span> На главную</a>
+</div>

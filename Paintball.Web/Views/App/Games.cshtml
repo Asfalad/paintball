@@ -1,0 +1,53 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-xs-12">
+        <header class="page-header">
+            <div class="pull-right">
+                <span>Дата </span> 
+                <datetimepicker name="beginDate" ng-model="today"
+                                date-format="yyyy-MM-dd"
+                                date-options="dateOptions"
+                                hidden-time="true"
+                                clear-text="Очистить"
+                                close-text="Выбрать"
+                                current-text="Сегодня"
+                                datepicker-append-to-body="true" required>
+                </datetimepicker>
+            </div>
+            <h1 class="page-title" ng-hide="$ctrl.myGames">Игры компании</h1>
+        </header>
+        <div ng-hide="count === 0" class="row" id="games">
+            <table class="table">
+                <thead>
+                    <tr><td>Дата начала</td><td>Дата окончания</td><td>Площадка</td><td>Тип игры</td><td>Цена</td></tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="game in games">
+                        <td>{{game.beginDate | date: 'yyyy-MM-dd HH:mm'}}</td>
+                        <td>{{game.endDate | date: 'yyyy-MM-dd HH:mm'}}</td>
+                        <td>{{playgrounds | getById: game.playground}}</td>
+                        <td>{{gameTypes | getById: game.gameType}}</td>
+                        <td>{{game.gamePrice}}</td>
+                        <td>
+                            
+                            <a href="/app/#!/company/games/update/{{game.id}}" title="Редактировать игру"><span class="fa fa-edit"></span></a>
+                            &nbsp;
+                            
+                            <a href="/app/#!/company/games/delete/{{game.id}}" title="Удалить игру"><span class="fa fa-close text-danger"></span></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-show="count === 0" class="row">
+            <h3>Нет игр</h3>
+        </div>
+        <div ng-hide="count === 0" class="center-block">
+            <ul class="pagination pagination-lg">
+                <li class="ng-class: page == pageNumber ? 'active' : ''" ng-repeat="page in getPages()"><a ng-click="getPage(page)">{{page}}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

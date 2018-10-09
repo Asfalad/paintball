@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "О нас";
+    ViewBag.Description = "Описание компании \""+Application.Name+"\". Мы на карте, обратная связь.";
+    ViewBag.Author = "Максим";
+    ViewBag.ReferrerMode = ReferrerMode.OriginWhenCrossOrigin;
+    ViewBag.OpenGraph = new OpenGraphBusiness(
+        ViewBag.Title,
+        new OpenGraphImage(Url.AbsoluteContent("~/content/icons/open-graph-1200x630.png")) { Height = 630, Type = ContentType.Png, Width = 1200 },
+        new OpenGraphContactData("1 Street Name", "City", "SW1 1SW", "United Kingdom")
+        {
+            Email = "maksymma@gmail.com",
+            Phone = "+38(096) 20-57-005",
+            Website = Url.AbsoluteRouteUrl(HomeControllerRoute.GetIndex)
+        },
+        new OpenGraphLocation(51.5286417, -0.1015987))
+        {
+            Determiner = OpenGraphDeterminer.Blank,
+            SiteName = Application.Name
+        };
+}
+<header id="head" class="secondary"></header>
+<!-- container -->
+<div class="container main">
+    <div class="row">
+        <!-- Article main content -->
+        <article class="col-sm-9 maincontent">
+            <header class="page-header">
+                <h1 class="page-title">About us</h1>
+            </header>
+            <h3>Lorem ipsum</h3>
+            <p><img src="assets/images/mac.jpg" alt="" class="img-rounded pull-right" width="300"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet, consequuntur eius repellendus eos aliquid molestiae ea laborum ex quibusdam laudantium voluptates placeat consectetur quam aliquam beatae soluta accusantium iusto nihil nesciunt unde veniam magnam repudiandae sapiente.</p>
+            <p>Quos, aliquam nam velit impedit minus tenetur beatae voluptas facere sint pariatur! Voluptatibus, quisquam, error, est assumenda corporis inventore illo nesciunt iure aut dolor possimus repellat minima veniam alias eius!</p>
+            <h3>Necessitatibus</h3>
+            <p>Velit, odit, eius, libero unde impedit quaerat dolorem assumenda alias consequuntur optio quae maiores ratione tempore sit aliquid architecto eligendi pariatur ab soluta doloremque dicta aspernatur labore quibusdam dolore corrupti quod inventore. Maiores, repellat, consequuntur eius repellendus eos aliquid molestiae ea laborum ex quibusdam laudantium voluptates placeat consectetur quam aliquam!</p>
+            <h3>Fugit, laboriosam</h3>
+            <p>Eum, quasi, est, vitae, ipsam nobis consectetur ea aspernatur ad eos voluptatibus fugiat nisi perferendis impedit. Quam, nulla, excepturi, voluptate minus illo tenetur sint ab in culpa cumque impedit quibusdam. Saepe, molestias quia voluptatem natus velit fugiat omnis rem eos sapiente quasi quaerat aspernatur quisquam deleniti accusantium laboriosam odio id?</p>
+            <h3>Doloribus, illo ipsum</h3>
+            <p>Velit, odit, eius, libero unde impedit quaerat dolorem assumenda alias consequuntur optio quae maiores ratione tempore sit aliquid architecto eligendi pariatur ab soluta doloremque dicta aspernatur labore quibusdam dolore corrupti quod inventore. Maiores, repellat, consequuntur eius repellendus eos aliquid molestiae ea laborum ex quibusdam laudantium voluptates placeat consectetur quam aliquam!</p>
+            <p>Eum, quasi, est, vitae, ipsam nobis consectetur ea aspernatur ad eos voluptatibus fugiat nisi perferendis impedit. Quam, nulla, excepturi, voluptate minus illo tenetur sint ab in culpa cumque impedit quibusdam. Saepe, molestias quia voluptatem natus velit fugiat omnis rem eos sapiente quasi quaerat aspernatur quisquam deleniti accusantium laboriosam odio id?</p>
+            <hr />
+            <h2 class="page-title">Свяжитесь с нами</h2>
+            <p>
+                Мы бедем рады пообщаться с вами. Заинтересованы в сотрудничестве? Заполните форму, задайте вопрос и я свяжусь с вами в ближайшее время. Пожалуйста дайте мне несколько дней, чтобы ответить.
+            </p>
+            <form>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <input class="form-control" name="name" type="text" placeholder="Имя">
+                    </div>
+                    <div class="col-sm-4">
+                        <input class="form-control" name="email" type="text" placeholder="Email">
+                    </div>
+                    <div class="col-sm-4">
+                        <input class="form-control" name="phone" type="text" placeholder="Телефон">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <textarea placeholder="Ваше сообщение здесь..." class="form-control" rows="9"></textarea>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-6 col-md-offset-6 text-right">
+                        <input class="btn btn-action" type="submit" value="Отправить сообщение">
+                    </div>
+                </div>
+            </form>
+        </article>
+        <!-- /Article -->
+        <!-- Sidebar -->
+        <aside class="col-sm-3 sidebar sidebar-right">
+            <div class="widget">
+                <h4>Адресс</h4>
+                <address>
+                    Одесса, проспект Маршала Жукова, 32Б
+                </address>
+                <h4>Телефон:</h4>
+                <address>
+                    +38(096) 20-57-005
+                </address>
+            </div>
+
+        </aside>
+        <!-- /Sidebar -->
+    </div>
+</div>	<!-- /container -->
+<section class="container-full top-space">
+    <div id="map"></div>
+</section>
+
+@section scripts{
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBh3629dRCxGIhJmvvm4JB8HnwrqyY3xpg&amp;sensor=false&amp;extension=.js"></script>
+    <script src="~/Scripts/google-map.js"></script>
+}

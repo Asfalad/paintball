@@ -1,0 +1,59 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-xs-12">
+        <header class="page-header">
+            <h1 class="page-title">Просмотр сотрудника "{{$ctrl.user.userName}}"</h1>
+        </header>
+        <div class="row">
+            <div class="row">
+                <h3 class="pull-left">{{$ctrl.user.firstName}} {{$ctrl.user.lastName}} {{$ctrl.user.middleName}}</h3>
+                <a class="btn btn-success pull-right" href="/app/#!/company/users/update/{{$ctrl.user.userName}}">Редактировать</a>
+            </div>
+            <div class="row">
+                <label for="permissions">
+                    Разрешения
+                </label>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="certificatesModify" class="checkbox" ng-model="$ctrl.user.certificatesModify" />
+                    <label for="certificatesModify">Редактирование и удаление сертификатов</label>
+                </div>
+
+                <div class="checkbox-container">
+                    <input type="checkbox" id="companyModify" class="checkbox" ng-model="$ctrl.user.companyModify" />
+                    <label for="companyModify">Редактирование данных компании</label>
+                </div>
+
+                <div class="checkbox-container">
+                    <input type="checkbox" id="equipmentModify" class="checkbox" ng-model="$ctrl.user.equipmentModify" />
+                    <label for="equipmentModify">Редактирование данных компании</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="eventsModify" class="checkbox" ng-model="$ctrl.user.eventsModify" />
+                    <label for="eventsModify">Редактирование и удаление событий</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="gameTypesModify" class="checkbox" ng-model="$ctrl.user.gameTypesModify" />
+                    <label for="gameTypesModify">Редактирование и удаление типов игр</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="newsModify" class="checkbox" ng-model="$ctrl.user.newsModify" />
+                    <label for="newsModify">Редактирование и удаление новостей</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="operationsRead" class="checkbox" ng-model="$ctrl.user.operationsRead" />
+                    <label for="operationsRead">Чтение бухгалтерии</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="operationsModify" class="checkbox" ng-model="$ctrl.user.operationsModify" />
+                    <label for="operationsModify">Редактирование бухгалтерии</label>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="playgroundsModify" class="checkbox" ng-model="$ctrl.user.playgroundsModify" />
+                    <label for="playgroundsModify">Редактирование и удаление игровых площадок</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

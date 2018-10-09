@@ -1,0 +1,18 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-xs-12">
+        <header class="page-header">
+            <h1 class="page-title">Удаление сертификата</h1>
+        </header>
+        <h3>
+            Вы действительно хотите удалить сертификат выписанный на имя
+            "{{$ctrl.certificate.lastName}} {{$ctrl.certificate.firstName}} {{$ctrl.certificate.middleName}}"?
+        </h3>
+        <div class="text-right">
+            <a class="btn btn-default" href="/app/#!/company/certificates">Отмена</a>
+            <button class="btn btn-danger" type="button" ng-click="$ctrl.proceed()">Удалить</button>
+        </div>
+    </div>
+</div>

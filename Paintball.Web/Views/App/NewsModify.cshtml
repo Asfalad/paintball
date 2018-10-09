@@ -1,0 +1,68 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-xs-12 maincontent">
+        <header class="page-header">
+            <h1 class="page-title" ng-hide="$ctrl.isCreating">Редактирование новости</h1>
+            <h1 class="page-title" ng-show="$ctrl.isCreating">Создание новости</h1>
+        </header>
+        <div class="row">
+            <form name="form">
+                <div class="row">
+                    <fieldset class="form-group col-sm-3">
+                        <label for="titleImage">
+                            Изображение события
+                        </label>
+                        <div class="button" ngf-select ng-model="$ctrl.news.titleImage" name="titleImage"
+                             ngf-pattern="'image/*'" ngf-accept="'image/*'"
+                             ngf-max-size="1MB"><img class="img-responsive img-thumbnail" ngf-thumbnail="$ctrl.news.titleImage || '/images/default.jpg'" /></div>
+                        
+                    </fieldset>
+                    <div class="col-sm-9">
+                        <fieldset class="form-group">
+                            <label for="title">
+                                Заголовок <span class="text-danger">*</span> &nbsp;
+                                <span class="text-danger" ng-show="form.title.$error.required && (form.title.$touched || form.$submitted)">
+                                    - нужно указать заголовок
+                                </span>
+                                <span class="text-danger" ng-show="form.title.$error.maxlength && (form.title.$touched || form.$submitted)">
+                                    - максимальная длина заголовка - 250 символов
+                                </span>
+                            </label>
+                            <input class="form-control" name="title" type="text" maxlength="250" placeholder="Введите заголовок..." ng-model="$ctrl.news.title" required />
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label for="shortDescription">
+                                Короткое описание <span class="text-danger">*</span> &nbsp;
+                                <span class="text-danger" ng-show="form.shortDescription.$error.required && (form.shortDescription.$touched || form.$submitted)">
+                                    - нужно указать описание
+                                </span>
+                                <span class="text-danger" ng-show="form.shortDescription.$error.maxlength && (form.shortDescription.$touched || form.$submitted)">
+                                    - максимальная длина описания - 100 символов
+                                </span>
+                            </label>
+                            <input class="form-control" name="shortDescription" type="text" maxlength="100" placeholder="Введите короткое описание..." ng-model="$ctrl.news.shortDescription" required />
+                        </fieldset>
+                    </div>
+                </div>
+                <input type="hidden" ng-model="$ctrl.news.publishDate" value="{{$ctrl.news.publishDate | date: 'yyyy-MM-dd HH:mm'}}" required/>
+                <fieldset class="form-group">
+                    <label for="text">
+                        Текст <span class="text-danger">*</span> &nbsp;
+                        <span class="text-danger" ng-show="form.text.$error.required && (form.text.$touched || form.$submitted)">
+                            - нужно ввести текст новости
+                        </span>
+                    </label>
+                    <div text-angular name="text" ng-model="$ctrl.news.text"
+                         ta-text-editor-class="clearfix border-around container" ta-html-editor-class="border-around" required></div>
+                </fieldset>
+                <div class="text-right">
+                    <a class="btn btn-default" href="/app/#!/news">Отмена</a>
+                    <button ng-show="$ctrl.isCreating" class="btn btn-action" type="submit" ng-click="form.$valid ? $ctrl.proceed() : ''">Создать событие</button>
+                    <button ng-hide="$ctrl.isCreating" class="btn btn-action" type="submit" ng-click="form.$valid ? $ctrl.proceed() : ''">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

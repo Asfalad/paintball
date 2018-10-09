@@ -1,0 +1,120 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-xs-12">
+        <header class="page-header">
+            <h1 class="page-title">Редактирование игры</h1>
+        </header>
+        <div class="row" ng-hide="$ctrl.gameCreated">
+            <form name="form">
+                <fieldset class="form-group">
+                    <label for="beginDate">
+                        Дата начала <span class="text-danger">*</span> &nbsp;
+                        <span class="text-danger" ng-show="form.beginDate.$error.required && (form.beginDate.$touched || form.$submitted)">
+                            - нужно указать дату начала
+                        </span>
+                    </label>
+                    <datetimepicker name="beginDate" ng-model="$ctrl.game.beginDate"
+                                    date-format="yyyy-MM-dd"
+                                    date-options="$ctrl.dateBeginOptions"
+                                    hidden-time="true"
+                                    clear-text="Очистить"
+                                    close-text="Выбрать"
+                                    current-text="Сегодня"
+                                    show-spinners="true"
+                                    datepicker-append-to-body="true" required>
+                    </datetimepicker>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="gameType">
+                        Тип игры <span class="text-danger">*</span> &nbsp;
+                        <span class="text-danger" ng-show="form.gameType.$error.required && (form.gameType.$touched || form.$submitted)">
+                            - выберите тип игры
+                        </span>
+                    </label>
+                    <select name="gameType" class="form-control" required
+                            ng-options="gametype.name for gametype in $ctrl.gameTypes track by gametype.id"
+                            ng-model="$ctrl.currentGameType"></select>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="playground">
+                        Площадка <span class="text-danger">*</span> &nbsp;
+                    </label>
+                    <div>
+                        <div ng-class="$ctrl.currentPlayground.id === playground.id ? 'panel panel-success' : 'panel panel-default'" ng-repeat="playground in $ctrl.playgrounds" ng-click="$ctrl.selectPlayground(playground)">
+                            <header class="panel-heading">
+                                <span><span class="badge">₴ {{playground.price}}</span> &nbsp;-&nbsp; {{playground.name}}</span>
+                                <span class="text-info" ng-show="$ctrl.currentPlayground.id === playground.id"> - выбранная площадка</span>
+                            </header>
+                            <div class="body panel-body row hidden-sm">
+                                <img class="img-responsive col-sm-3 col-xs-3" ng-show="playground.firstImage" src="{{playground.firstImage}}" />
+                                <img class="img-responsive col-sm-3 col-xs-3" ng-show="playground.secondImage" src="{{playground.secondImage}}" />
+                                <img class="img-responsive col-sm-3 col-xs-3" ng-show="playground.thirdImage" src="{{playground.thirdImage}}" />
+                                <img class="img-responsive col-sm-3 col-xs-3" ng-show="playground.fourthImage" src="{{playground.fourthImage}}" />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="playerCount">
+                        Количество игроков <span class="text-danger">*</span> &nbsp;
+                        <span class="text-danger" ng-show="form.playerCount.$error.required && (form.playerCount.$touched || form.$submitted)">
+                            - нужно указать количество игроков
+                        </span>
+                        <span class="text-danger" ng-show="form.playerCount.$error.min && (form.playerCount.$touched || form.$submitted)">
+                            - количество игроков должно быть не менее 1
+                        </span>
+                    </label>
+                    <input name="playerCount" class="form-control" type="number" min="1" ng-model="$ctrl.game.playerCount" required />
+                </fieldset>
+                <div class="row text-right">
+                    
+                    <a class="btn btn-default" href="/app/#!/company/games">Отмена</a>
+                    <button class="btn btn-action" type="submit" ng-click="form.$valid ? $ctrl.proceed() : ''">Продолжить</button>
+                </div>
+            </form>
+        </div>
+        <div ng-show="$ctrl.gameCreated">
+            <form name="form">
+                <h3>Цена игры: ₴ {{$ctrl.game.gamePrice}}</h3>
+                <table class="table table-responsive">
+                    <thead>
+                        <tr><th>Оборудование</th><th>Количество</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="order in $ctrl.equipmentOrders">
+                            <td>{{$ctrl.equipments | getById: order.equipmentId}}</td>
+                            <td>{{order.count}}</td>
+                            <td><button class="btn btn-success" ng-click="$ctrl.editOrder(order)">Редактировать</button> <button class="btn btn-danger" ng-click="$ctrl.deleteOrder(order)">Удалить</button></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr ng-show="$ctrl.equipmentCreating">
+                            <td>
+                                <select name="gameType" class="form-control" required
+                                        ng-options="equipment.name for equipment in $ctrl.equipments track by equipment.id"
+                                        ng-model="$ctrl.creatingEquipment"></select>
+                            </td>
+                            <td><input class="form-control" type="number" min="1" value="1" max="$ctrl.creatingEquipment.count" ng-model="$ctrl.newEquipmentOrder.count" /></td>
+                            <td><button class="btn btn-success" ng-click="form.$valid ? $ctrl.addOrder() : ''">Создать</button> <button class="btn btn-default" ng-click="$ctrl.cancel()">Отмена</button></td>
+                        </tr>
+                        <tr ng-show="$ctrl.updatingEquipment">
+                            <td>
+                                <select name="gameType" class="form-control" required
+                                        ng-options="equipment.name for equipment in $ctrl.equipments track by equipment.id"
+                                        ng-model="$ctrl.creatingEquipment"></select>
+                            </td>
+                            <td><input class="form-control" type="number" min="1" value="1" max="$ctrl.creatingEquipment.count" ng-model="$ctrl.newEquipmentOrder.count" /></td>
+                            <td><button class="btn btn-success" ng-click="form.$valid ? $ctrl.saveOrder() : ''">Сохранить</button> <button class="btn btn-default" ng-click="$ctrl.cancel()">Отмена</button></td>
+                        </tr>
+                        <tr ng-hide="$ctrl.equipmentCreating"><td></td><td></td><td><button class="btn btn-default" ng-click="$ctrl.createEquipment()">Добавить оборудование</button></td></tr>
+                    </tfoot>
+                </table>
+            </form>
+            <div class="pull-right">
+                <a href="/app/#!/company/games" class="btn btn-success">Сохранить</a>
+            </div>
+        </div>
+    </div>
+</div>

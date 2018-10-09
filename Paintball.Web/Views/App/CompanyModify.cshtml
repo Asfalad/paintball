@@ -1,0 +1,66 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-xs-12">
+        <header class="page-header">
+            <h1 class="page-title">Редактирование компании</h1>
+        </header>
+        <div class="row">
+            <form name="form" enctype="multipart/form-data">
+                <div class="row">
+                    <fieldset class="form-group col-sm-3">
+                        <label for="logoImage">
+                            Логотип компании
+                        </label>
+                        <div>
+                            <div class="button" ngf-select ng-model="company.logoImage" name="file"
+                                 ngf-pattern="'image/*'" ngf-accept="'image/*'"
+                                 ngf-max-size="1MB"><img class="img-responsive img-thumbnail" ngf-thumbnail="company.logoImage || '/images/default.jpg'" /></div>
+                        </div>
+                    </fieldset>
+                    <div class="col-sm-9">
+                        <fieldset class="form-group">
+                            <label for="name">
+                                Название <span class="text-danger">*</span> &nbsp;
+                                <span class="text-danger" ng-show="form.name.$error.required && (form.name.$touched || form.$submitted)">
+                                    - нужно указать название компании
+                                </span>
+                                <span class="text-danger" ng-show="form.name.$error.maxlength && (form.name.$touched || form.$submitted)">
+                                    - максимальная длина названия - 250 символов
+                                </span>
+                            </label>
+                            <input class="form-control" name="name" type="text" maxlength="250" placeholder="Введите название компании..." ng-model="company.name" required />
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label for="adress">
+                                Адресс <span class="text-danger">*</span> &nbsp;
+                                <span class="text-danger" ng-show="form.adress.$error.required && (form.adress.$touched || form.$submitted)">
+                                    - нужно указать адресс компании
+                                </span>
+                                <span class="text-danger" ng-show="form.adress.$error.maxlength && (form.adress.$touched || form.$submitted)">
+                                    - максимальная длина адресса - 500 символов
+                                </span>
+                            </label>
+                            <input class="form-control" name="adress" type="text" maxlength="500" placeholder="Введите адресс компании..." ng-model="company.adress" required />
+                        </fieldset>
+                    </div>
+                </div>
+                <fieldset class="form-group">
+                    <label for="description">
+                        Описание <span class="text-danger">*</span> &nbsp;
+                        <span class="text-danger" ng-show="form.description.$error.required && (form.description.$touched || form.$submitted)">
+                            - нужно ввести описание компании
+                        </span>
+                    </label>
+                    <div text-angular name="description" ng-model="company.description"
+                         ta-text-editor-class="clearfix border-around container" ta-html-editor-class="border-around" required></div>
+                </fieldset>
+                <div class="text-right">
+                    <a class="btn btn-default" href="/app/#!/">Отмена</a>
+                    <button class="btn btn-action" type="submit" ng-click="form.$valid ? proceed() : ''">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

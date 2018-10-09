@@ -1,0 +1,113 @@
+﻿@model Paintball.Web.Model.CompanyReadViewModel
+@{
+    ViewBag.Title = Model.Company.Name;
+}
+<header id="head" class="secondary"></header>
+
+<div class="container main">
+    <ol class="breadcrumb">
+        <li><a href="@Url.RouteUrl(HomeControllerRoute.GetIndex)">Главная</a></li>
+        <li><a href="@Url.RouteUrl(CompaniesControllerRoute.GetIndex)">Компании</a></li>
+        <li class="active">@ViewBag.Title</li>  
+    </ol>
+    <div class="row">
+        <div class="col-sm-9 maincontent">
+            <header class="page-header">
+                <a class="btn btn-success pull-right" href="/app/#!/order/@Model.Company.Id">Забронировать игру</a>
+                <h1 class="page-title">@Model.Company.Name</h1>
+                <div class="clearfix"></div>
+            </header>
+            <article class="description">
+                @if (string.IsNullOrEmpty(Model.Company.LogoImage))
+                {
+                    <img class="img-thumbnail img-responsive company-logo" src="~/Images/default.jpg" alt="default image" />
+                }
+                else
+                {
+                    <img class="img-thumbnail img-responsive company-logo" src="@Model.Company.LogoImage" alt="@Model.Company.Name" />
+                }
+                @Html.Raw(Model.Company.Description)
+            </article>
+            <div class="item-gametypes">
+                <header>
+                    <h3>Типы игр</h3>
+                </header>
+                <div class="body row">
+                    <div class="col-sm-12">
+                        <ul class="list-group">
+                            @foreach (var gameType in Model.GameTypes)
+                            {
+                                <li class="list-group-item list-group-item-success">@gameType.Name <span class="badge">@((int)gameType.Price) UAH</span></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="item-playground">
+                <header>
+                    <h3>Игровые площадки</h3>
+                </header>
+                <div class="body">
+                    @foreach (var playground in Model.Playgrounds)
+                    {
+                        <div class="panel panel-success">
+                            <header class="panel-heading">
+                                <span class="pull-left"><span class="badge">₴ @playground.Price</span> &nbsp;-&nbsp; @playground.Name</span>
+                                <div class="clearfix"></div>
+                            </header>
+                            <div class="body panel-body">
+                                <div class="row">
+                                    @if (string.IsNullOrEmpty(playground.FirstImage))
+                                    {
+                                        <img class="img-responsive col-sm-3" src="~/Images/default.jpg" alt="Изображение по умолчанию" />
+                                    }
+                                    else
+                                    {
+                                        <img class="img-responsive col-sm-3" src="@playground.FirstImage" alt="Первое изображение игровой площадки" />
+                                    }
+                                    @if (!string.IsNullOrEmpty(playground.SecondImage))
+                                    {
+                                        <img class="img-responsive col-sm-3" src="@playground.SecondImage" alt="Второе изображение игровой площадки" />
+                                    }
+                                    @if (!string.IsNullOrEmpty(playground.ThirdImage))
+                                    {
+                                        <img class="img-responsive col-sm-3" src="@playground.ThirdImage" alt="Третье изображение игровой площадки" />
+                                    }
+                                    @if (!string.IsNullOrEmpty(playground.FourthImage))
+                                    {
+                                        <img class="img-responsive col-sm-3" src="@playground.FourthImage" alt="Четвертое изображение игровой площадки" />
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- Sidebar -->
+        <aside class="col-sm-3 sidebar sidebar-right">
+            <div class="widget">
+                <h4>Последние новости</h4>
+            </div>
+            @foreach (var ev in Model.TopNews)
+            {
+                <div class="row widget">
+                    <div class="col-xs-12">
+                        <a href="@Url.RouteUrl(NewsControllerRoute.GetRead, new { id = ev.Id })">
+                            <h4>@ev.Title</h4>
+                            @if (string.IsNullOrEmpty(ev.TitleImage))
+                            {
+                                <img class="img-thumbnail img-responsive" src="~/Images/default.jpg" alt="Изображение по умолчанию" />
+                            }
+                            else
+                            {
+                                <img class="img-thumbnail img-responsive" src="@ev.TitleImage" alt="@ev.Title" />
+                            }
+                        </a>
+                    </div>
+                </div>
+            }
+        </aside>
+        <!-- /Sidebar -->
+    </div>
+</div>

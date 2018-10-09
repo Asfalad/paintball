@@ -1,0 +1,20 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-xs-12">
+        <header class="page-header">
+            <h1 class="page-title">Компании</h1>
+        </header>
+        <div class="row" id="companies">
+            <article class="company container-fluid col-sm-3 col-sm-offset-1" ng-repeat="company in $ctrl.companies">
+                @*Компании*@
+            </article>
+        </div>
+        <div class="center-block">
+            <ul class="pagination pagination-lg">
+                <li class="ng-class: page == $ctrl.pageNumber ? 'active' : ''" ng-repeat="page in $ctrl.getPages()"><a ng-click="$ctrl.getPage(page)">{{page}}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,95 @@
+﻿@model Paintball.Web.Model.NewsGetAllViewModel
+
+@{
+    ViewBag.Title = "Новости";
+}
+<header id="head" class="secondary"></header>
+
+<div class="container main">
+    <ol class="breadcrumb">
+        <li><a href="@Url.RouteUrl(HomeControllerRoute.GetIndex)">Главная</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+    <div class="row">
+        <div class="col-sm-9 maincontent">
+            <header class="page-header">
+                <h1 class="page-title">Новости</h1>
+            </header>
+            @if (Model.News.Count() > 0)
+            {
+                foreach (var item in Model.News)
+                {
+                    <article class="panel panel-default">
+                        <header class="panel panel-heading">
+                            <a class="pull-left" href="@Url.RouteUrl(NewsControllerRoute.GetRead, new { id = item.Id })">@item.Title</a>
+                            <span class="pull-right">@item.PublishDate.ToShortDateString()</span>
+                            <div class="clearfix"></div>
+                        </header>
+                        <div class="panel-body">
+                            @if (string.IsNullOrEmpty(item.TitleImage))
+                            {
+                                <img class="pull-left img-responsive item-image" src="~/Images/default.jpg" alt="Изображение по умолчанию" />
+                            }
+                            else
+                            {
+                                <img class="pull-left img-responsive item-image" src="@item.TitleImage" alt="@item.Title" />
+                            }
+                            @if (item.Text.Length > 400)
+                            {
+                                <p>@Html.Raw(item.Text.Substring(0, 400)) <a href="@Url.RouteUrl(NewsControllerRoute.GetRead, new { id = item.Id })"> читать далее...</a></p>
+                            }
+                            else
+                            {
+                                <p>@Html.Raw(item.Text)</p>
+                            }
+                        </div>
+                    </article>
+                }
+            }
+            else
+            {
+                <h3>Новостей нет</h3>
+            }
+            <div>
+                <ul class="pagination pagination-lg">
+                    @for (int i = 0; i < Model.PageCount; i++)
+                    {
+                        if (Model.CurrentPage == (i + 1))
+                        {
+                            <li class="active"><a href="#">@(i + 1)</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.RouteUrl(NewsControllerRoute.GetIndex, new { pageNumber = i + 1 })">@(i + 1)</a></li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <!-- Sidebar -->
+        <aside class="col-sm-3 sidebar sidebar-right">
+            <div class="widget">
+                <h4>Последние события</h4>
+            </div>
+            @foreach (var ev in Model.TopEvents)
+            {
+                <div class="row widget">
+                    <div class="col-xs-12">
+                        <a href="@Url.RouteUrl(EventsControllerRoute.GetRead, new { id = ev.Id })">
+                            <h4>@ev.Title</h4>
+                            @if (string.IsNullOrEmpty(ev.TitleImage))
+                            {
+                                <img class="img-thumbnail img-responsive" src="~/Images/default.jpg" alt="Изображение по умолчанию" />
+                            }
+                            else
+                            {
+                                <img class="img-thumbnail img-responsive" src="@ev.TitleImage" alt="@ev.Title" />
+                            }
+                        </a>
+                    </div>
+                </div>
+            }
+        </aside>
+        <!-- /Sidebar -->
+    </div>
+</div>

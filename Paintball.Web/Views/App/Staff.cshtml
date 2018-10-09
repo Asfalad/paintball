@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-xs-12">
+        <header class="page-header">
+            <div class="row">
+                <a class="btn btn-action btn-lg pull-right" href="/app/#!/company/users/create">Создать сотрудника</a>
+                <h1 class="page-title">Сотрудники</h1>
+            </div>
+        </header>
+        <div ng-hide="$ctrl.count === 0"  class="row" id="users">
+            
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <td>Логин</td>
+                        <td>Имя</td>
+                        <td>Фамилия</td>
+                        <td>Отчество</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in $ctrl.users">
+                        <td><a href="/app/#!/company/users/{{user.userName}}">{{user.userName}}</a></td>
+                        <td>{{user.firstName}}</td>
+                        <td>{{user.lastName}}</td>
+                        <td>{{user.middleName}}</td>
+                        <td>
+                            <a href="/app/#!/company/users/update/{{user.userName}}" title="Редактировать пользователя"><span class="fa fa-edit"></span></a>
+                            &nbsp;
+                            <a href="/app/#!/company/users/delete/{{user.userName}}" title="Удалить пользователя"><span class="fa fa-close text-danger"></span></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-show="$ctrl.count === 0" class="row">
+            <h3>Нет сотрудников</h3>
+        </div>
+        <div ng-hide="$ctrl.count === 0" class="center-block">
+            <ul class="pagination pagination-lg">
+                <li class="ng-class: page == $ctrl.pageNumber ? 'active' : ''" ng-repeat="page in $ctrl.getPages()"><a ng-click="$ctrl.getPage(page)">{{page}}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

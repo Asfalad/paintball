@@ -1,0 +1,37 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-xs-12">
+        <header class="page-header">
+            <div class="row">
+                <a class="btn btn-action pull-right btn-lg" href="/app/#!/company/playgrounds/create">Создать площадку</a>
+                <h1 class="page-title">Игровые площадки компании</h1>
+            </div>
+        </header>
+        <div ng-hide="$ctrl.count === 0"  class="row" id="playgrounds">
+            <div class="panel panel-success" ng-repeat="playground in $ctrl.playgrounds">
+                <header class="panel-heading">
+                    <span class="pull-left"><span class="badge">₴ {{playground.price}}</span> &nbsp;-&nbsp; {{playground.name}}</span>
+                    <a class="btn btn-success pull-right" href="/app/#!/company/playgrounds/update/{{playground.id}}">Редактировать</a>
+                    <a class="btn btn-danger pull-right" href="/app/#!/company/playgrounds/delete/{{playground.id}}">Удалить</a>
+                    <div class="clearfix"></div>
+                </header>
+                <div class="body panel-body row">
+                    <img class="img-responsive col-sm-3" ng-show="playground.firstImage" src="{{playground.firstImage}}" />
+                    <img class="img-responsive col-sm-3" ng-show="playground.secondImage" src="{{playground.secondImage}}" />
+                    <img class="img-responsive col-sm-3" ng-show="playground.thirdImage" src="{{playground.thirdImage}}" />
+                    <img class="img-responsive col-sm-3" ng-show="playground.fourthImage" src="{{playground.fourthImage}}" />
+                </div>
+            </div>
+        </div>
+        <div ng-show="$ctrl.count === 0" class="row">
+            <h3>Нет игровых площадок</h3>
+        </div>
+        <div ng-hide="$ctrl.count === 0" class="center-block">
+            <ul class="pagination pagination-lg">
+                <li class="ng-class: page == $ctrl.pageNumber ? 'active' : ''" ng-repeat="page in $ctrl.getPages()"><a ng-click="$ctrl.getPage(page)">{{page}}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

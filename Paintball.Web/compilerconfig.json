@@ -1,0 +1,22 @@
+﻿[
+  {
+    "outputFile": "Content/Site.css",
+    "inputFile": "Content/Site.less"
+  },
+  {
+    "outputFile": "Content/loader.css",
+    "inputFile": "Content/loader.less"
+  },
+  {
+    "outputFile": "Content/bootstrap-theme.css",
+    "inputFile": "Content/bootstrap-theme.less"
+  },
+  {
+    "outputFile": "Scripts/site.es5.js",
+    "inputFile": "Scripts/site.js"
+  },
+  {
+    "outputFile": "Scripts/google-map.es5.js",
+    "inputFile": "Scripts/google-map.js"
+  }
+]

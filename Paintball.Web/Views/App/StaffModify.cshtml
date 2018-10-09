@@ -1,0 +1,141 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-xs-12">
+        <header class="page-header">
+            <h1 class="page-title" ng-hide="$ctrl.isCreating">Редактирование сотрудника "{{$ctrl.user.userName}}"</h1>
+            <h1 class="page-title" ng-show="$ctrl.isCreating">Создание сотрудника</h1>
+        </header>
+        <div class="row">
+            <form name="form">
+                <div class="top-margin alert alert-danger" ng-show="$ctrl.message">
+                    {{$ctrl.message}}
+                </div>
+                <fieldset class="form-group" ng-show="$ctrl.isCreating">
+                    <label for="email">
+                        Email <span class="text-danger">*</span> &nbsp;
+                        <span class="text-danger" ng-show="form.email.$error.required && (form.email.$touched || form.$submitted)">
+                            - нужно указать email
+                        </span>
+                        <span class="text-danger" ng-show="form.email.$error.maxlength && (form.email.$touched || form.$submitted)">
+                            - максимальная длина - 250 символов
+                        </span>
+                    </label>
+                    <input class="form-control" name="email" type="email" maxlength="250" placeholder="Введите e-mail..." ng-model="$ctrl.user.email" ng-required="$ctrl.isCreating" />
+                </fieldset>
+                <fieldset class="form-group" ng-show="$ctrl.isCreating">
+                    <label for="password">
+                        Пароль <span class="text-danger">*</span> &nbsp;
+                        <span class="text-danger" ng-show="form.password.$error.required && (form.password.$touched || form.$submitted)">
+                            - нужно указать пароль
+                        </span>
+                        <span class="text-danger" ng-show="form.password.$error.maxlength && (form.password.$touched || form.$submitted)">
+                            - максимальная длина - 250 символов
+                        </span>
+                        <span class="text-danger" ng-show="form.password.$error.minlength && (form.password.$touched || form.$submitted)">
+                            - минимальная длина - 6 символов
+                        </span>
+                    </label>
+                    <input class="form-control" name="password" type="password" minlength="6" maxlength="250" placeholder="Введите пароль..." ng-model="$ctrl.user.password" ng-required="$ctrl.isCreating" />
+                </fieldset>
+                <fieldset class="form-group" ng-show="$ctrl.isCreating">
+                    <label for="passwordConfirm">
+                        Подтвердите пароль <span class="text-danger">*</span> &nbsp;
+                        <span class="text-danger" ng-show="form.passwordConfirm.$error.required && (form.passwordConfirm.$touched || form.$submitted)">
+                            - нужно указать пароль
+                        </span>
+                        <span class="text-danger" ng-show="form.passwordConfirm.$error.maxlength && (form.passwordConfirm.$touched || form.$submitted)">
+                            - максимальная длина - 250 символов
+                        </span>
+                        <span class="text-danger" ng-show="form.passwordConfirm.$error.minlength && (form.passwordConfirm.$touched || form.$submitted)">
+                            - минимальная длина - 6 символов
+                        </span>
+                    </label>
+                    <input class="form-control" name="passwordConfirm" type="password" minlength="6" maxlength="250" placeholder="Введите пароль..." ng-model="$ctrl.user.confirmPassword" ng-required="$ctrl.isCreating" />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="name">
+                        Имя
+                        <span class="text-danger" ng-show="form.name.$error.maxlength && (form.name.$touched || form.$submitted)">
+                            - максимальная длина - 128 символов
+                        </span>
+                    </label>
+                    <input class="form-control" name="name" type="text" maxlength="128" placeholder="Введите имя..." ng-model="$ctrl.user.firstName" />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="surname">
+                        Фамилия
+                        <span class="text-danger" ng-show="form.surname.$error.maxlength && (form.surname.$touched || form.$submitted)">
+                            - максимальная длина - 128 символов
+                        </span>
+                    </label>
+                    <input class="form-control" name="surname" type="text" maxlength="128" placeholder="Введите фамилию..." ng-model="$ctrl.user.lastName" />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="midname">
+                        Отчество
+                        <span class="text-danger" ng-show="form.midname.$error.maxlength && (form.midname.$touched || form.$submitted)">
+                            - максимальная длина - 128 символов
+                        </span>
+                    </label>
+                    <input class="form-control" name="midname" type="text" maxlength="128" placeholder="Введите отчество..." ng-model="$ctrl.user.middleName" />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="salary">
+                        Зарплата
+                    </label>
+                    <input class="form-control" name="salary" type="number" placeholder="Укажите зарплату..." ng-model="$ctrl.user.salary" />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="permissions">
+                        Разрешения
+                    </label>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="certificatesModify" class="checkbox" ng-model="$ctrl.user.certificatesModify" />
+                        <label for="certificatesModify">Редактирование и удаление сертификатов</label>
+                    </div>
+
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="companyModify" class="checkbox" ng-model="$ctrl.user.companyModify" />
+                        <label for="companyModify">Редактирование данных компании</label>
+                    </div>
+
+                    <div  class="checkbox-container">
+                        <input type="checkbox" id="equipmentModify" class="checkbox" ng-model="$ctrl.user.equipmentModify" />
+                        <label for="equipmentModify">Редактирование данных компании</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="eventsModify" class="checkbox" ng-model="$ctrl.user.eventsModify" />
+                        <label for="eventsModify">Редактирование и удаление событий</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="gameTypesModify" class="checkbox" ng-model="$ctrl.user.gameTypesModify" />
+                        <label for="gameTypesModify">Редактирование и удаление типов игр</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="newsModify" class="checkbox" ng-model="$ctrl.user.newsModify" />
+                        <label for="newsModify">Редактирование и удаление новостей</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="operationsRead" class="checkbox" ng-model="$ctrl.user.operationsRead" />
+                        <label for="operationsRead">Чтение бухгалтерии</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="operationsModify" class="checkbox" ng-model="$ctrl.user.operationsModify" />
+                        <label for="operationsModify">Редактирование бухгалтерии</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="playgroundsModify" class="checkbox" ng-model="$ctrl.user.playgroundsModify" />
+                        <label for="playgroundsModify">Редактирование и удаление игровых площадок</label>
+                    </div>
+                </fieldset>
+                <div class="text-right">
+                    <a class="btn btn-default" href="/app/#!/company/gametypes">Отмена</a>
+                    <button ng-show="$ctrl.isCreating" class="btn btn-action" type="submit" ng-click="form.$valid ? $ctrl.proceed() : ''">Создать</button>
+                    <button ng-hide="$ctrl.isCreating" class="btn btn-action" type="submit" ng-click="form.$valid ? $ctrl.proceed() : ''">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

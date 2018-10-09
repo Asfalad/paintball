@@ -1,0 +1,64 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <!-- Main content -->
+    <div class="col-xs-12">
+        <header class="page-header">
+            <h1 class="page-title">Вход в аккаунт</h1>
+        </header>
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3 class="thin text-center">Войдите в аккаунт</h3>
+                    <hr>
+                    <form name="form">
+                        <div class="top-margin alert alert-danger" ng-show="$ctrl.message && !$ctrl.savedSuccessfully">
+                            {{$ctrl.message}}
+                        </div>
+                        <div class="top-margin alert alert-success" ng-show="$ctrl.savedSuccessfully">
+                            {{$ctrl.message}}
+                        </div>
+                        <div class="top-margin">
+                            <label for="email">
+                                E-mail<span class="text-danger">*</span>
+                                <span class="text-danger" ng-show="form.email.$error.required && (form.email.$touched || form.$submitted)">
+                                    - нужно ввести адресс электронной почты
+                                </span>
+                                <span class="text-danger" ng-show="form.email.$error.email && (form.firstName.$touched || form.$submitted)">
+                                    - нужно ввести правильный адресс электронной почты
+                                </span>
+                            </label>
+                            <input name="email" type="email" class="form-control" data-ng-model="$ctrl.loginData.userName" placeholder="Введите ваш e-mail..." required autofocus>
+                        </div>
+                        <div class="top-margin">
+                            <label for="password">
+                                Пароль <span class="text-danger">*</span>
+                                <span class="text-danger" ng-show="form.password.$error.required && (form.password.$touched || form.$submitted)">
+                                    - нужно ввести пароль
+                                </span>
+                                <span class="text-danger" ng-show="form.password.$error.minlength && (form.password.$touched || form.$submitted)">
+                                    - пароль должен содержать минимум 6 символов
+                                </span>
+                            </label>
+                            <input name="password" minlength="6" type="password" class="form-control" data-ng-model="$ctrl.loginData.password" placeholder="Введите ваш пароль..." required>
+                            <div class="text-right">
+                                <b><a class="btn" href="#">Забыли пароль?</a></b>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-6 text-center">
+                                <a class="btn btn-default" ng-href="/app/#!register">Регистрация</a>
+                            </div>
+                            <div class="col-sm-6 text-center">
+                                <button class="btn btn-action" data-ng-click="$ctrl.login()">Вход</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- / Main content -->
+</div>

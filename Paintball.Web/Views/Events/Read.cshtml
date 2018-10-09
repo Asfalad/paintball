@@ -1,0 +1,76 @@
+﻿@model Paintball.Web.Model.EventsReadViewModel
+
+@{
+    ViewBag.Title = Model.CurrentEvent.Event.Title;
+    ViewBag.Description = Model.CurrentEvent.Event.ShortDescription;
+    ViewBag.ReferrerMode = ReferrerMode.OriginWhenCrossOrigin;
+    ViewBag.OpenGraph = new OpenGraphWebsite(
+        ViewBag.Title,
+        new OpenGraphImage(Url.AbsoluteContent(Model.CurrentEvent.Event.TitleImage)) { Height = 630, Type = ContentType.Jpg, Width = 1200 })
+    {
+        Determiner = OpenGraphDeterminer.Blank,
+        SiteName = Application.Name,
+        Description = Model.CurrentEvent.Event.ShortDescription
+    };
+}
+<header id="head" class="secondary"></header>
+
+<div class="container main">
+    <ol class="breadcrumb">
+        <li><a href="@Url.RouteUrl(HomeControllerRoute.GetIndex)">Главная</a></li>
+        <li><a href="@Url.RouteUrl(EventsControllerRoute.GetIndex)">События</a></li>
+        <li class="active">@ViewBag.Title</li>
+    </ol>
+    <div class="row">
+        <div class="col-sm-9 maincontent">
+            <header class="page-header">
+                <h1><a href="@Url.RouteUrl(CompaniesControllerRoute.GetRead, new { id = Model.CurrentEvent.Company.Id })">@Model.CurrentEvent.Company.Name</a> - @Model.CurrentEvent.Event.Title</h1>
+                <span class="pull-right">Запланировано на <strong>@Model.CurrentEvent.Game.BeginDate.ToString("dd.MM.yyyy HH:mm")</strong></span>
+                <div class="clearfix"></div>
+            </header>
+            <article class="item-single">
+                <div class="body">
+                    @if (string.IsNullOrEmpty(Model.CurrentEvent.Event.TitleImage))
+                    {
+                        <img class="img-thumbnail img-responsive pull-left item-image-single" src="~/Images/default.jpg" alt="Изображение по умолчанию" />
+                    }
+                    else
+                    {
+                        <img class="img-thumbnail img-responsive pull-left item-image-single" src="@Model.CurrentEvent.Event.TitleImage" alt="@Model.CurrentEvent.Event.Title" />
+                    }
+                    @Html.Raw(Model.CurrentEvent.Event.Description)
+                    <div class="clearfix"></div>
+                    <hr />
+                </div>
+                <footer>
+                    
+                </footer>
+            </article>
+        </div>
+        <!-- Sidebar -->
+        <aside class="col-sm-3 sidebar sidebar-right">
+            <div class="widget">
+                <h4>Последние новости</h4>
+            </div>
+            @foreach (var ev in Model.TopNews)
+            {
+                <div class="row widget">
+                    <div class="col-xs-12">
+                        <a href="@Url.RouteUrl(NewsControllerRoute.GetRead, new { id = ev.Id })">
+                            <h4>@ev.Title</h4>
+                            @if (string.IsNullOrEmpty(ev.TitleImage))
+                            {
+                                <img src="~/Images/default.jpg" alt="Изображение по умолчанию" />
+                            }
+                            else
+                            {
+                                <img class="img-thumbnail img-responsive" src="@ev.TitleImage" alt="@ev.Title" />
+                            }
+                        </a>
+                    </div>
+                </div>
+            }
+        </aside>
+        <!-- /Sidebar -->
+    </div>
+</div>

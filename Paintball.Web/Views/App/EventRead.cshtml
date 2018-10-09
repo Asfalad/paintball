@@ -1,0 +1,24 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-sm-12 maincontent">
+        <header class="page-header">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h1 class="page-title">{{$ctrl.event.title}}</h1>
+                </div>
+                <div class="col-sm-4">
+                    <a class="btn btn-action btn-lg" href="/app/#!/events/update/{{$ctrl.event.id}}">Редактировать событие</a>
+                </div>
+            </div>
+        </header>
+        <div class="event">
+            <a ng-hide="$ctrl.event.titleImage" href="/app/#!/events/{{$ctrl.event.id}}"><img class="img-thumbnail img-responsive" src="~/images/default.jpg" alt="defaultImage"/></a>
+            <a ng-show="$ctrl.event.titleImage" href="/app/#!/events/{{$ctrl.event.id}}"><img class="img-thumbnail img-responsive" src="{{$ctrl.event.titleImage}}" alt="{{$ctrl.event.title}}" /></a>
+            
+            {{$ctrl.event.description}}
+        </div>
+    </div>
+
+</div>

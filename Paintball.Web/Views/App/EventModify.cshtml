@@ -1,0 +1,125 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-sm-12 maincontent">
+        <header class="page-header">
+            <h1 class="page-title" ng-hide="$ctrl.isCreating">Редактирование события</h1>
+            <h1 class="page-title" ng-show="$ctrl.isCreating">Создание события</h1>
+        </header>
+        <div class="row">
+            <form name="form">
+                <div class="row">
+                    <fieldset class="form-group col-sm-3">
+                        <label for="logoImage">
+                            Изображение события
+                        </label>
+                        <div>
+                            <div class="button" ngf-select ng-model="$ctrl.event.titleImage" name="file"
+                                 ngf-pattern="'image/*'" ngf-accept="'image/*'"
+                                 ngf-max-size="1MB"><img class="img-responsive img-thumbnail" ngf-thumbnail="$ctrl.event.titleImage || '/images/default.jpg'" /></div>
+                        </div>
+                    </fieldset>
+                    <div class="col-sm-9">
+                        <fieldset class="form-group">
+                            <label for="title">
+                                Заголовок <span class="text-danger">*</span> &nbsp;
+                                <span class="text-danger" ng-show="form.title.$error.required && (form.title.$touched || form.$submitted)">
+                                    - нужно указать заголовок
+                                </span>
+                                <span class="text-danger" ng-show="form.title.$error.maxlength && (form.title.$touched || form.$submitted)">
+                                    - максимальная длина заголовка - 250 символов
+                                </span>
+                            </label>
+                            <input class="form-control" name="title" type="text" maxlength="250" placeholder="Введите заголовок..." ng-model="$ctrl.event.title" required />
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label for="shortDescription">
+                                Короткое описание <span class="text-danger">*</span> &nbsp;
+                                <span class="text-danger" ng-show="form.shortDescription.$error.required && (form.shortDescription.$touched || form.$submitted)">
+                                    - нужно указать описание
+                                </span>
+                                <span class="text-danger" ng-show="form.shortDescription.$error.maxlength && (form.shortDescription.$touched || form.$submitted)">
+                                    - максимальная длина описания - 100 символов
+                                </span>
+                            </label>
+                            <input class="form-control" name="shortDescription" type="text" maxlength="100" placeholder="Введите короткое описание..." ng-model="$ctrl.event.shortDescription" required />
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label for="beginDate">
+                                Дата начала <span class="text-danger">*</span> &nbsp;
+                                <span class="text-danger" ng-show="form.beginDate.$error.required && (form.beginDate.$touched || form.$submitted)">
+                                    - нужно указать дату начала
+                                </span>
+                            </label>
+                            <datetimepicker name="beginDate" ng-model="$ctrl.game.beginDate"
+                                            date-format="yyyy-MM-dd"
+                                            date-options="$ctrl.dateBeginOptions"
+                                            hidden-time="true"
+                                            clear-text="Очистить"
+                                            close-text="Выбрать"
+                                            current-text="Сегодня"
+                                            datepicker-append-to-body="true" required>
+                            </datetimepicker>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label for="endDate">
+                                Дата окончания &nbsp;
+                                <span class="text-danger" ng-show="form.endDate.$error.mindate && (form.endDate.$touched || form.$submitted)">
+                                    - дата окончания события не может быть меньше даты начала
+                                </span>
+                            </label>
+                            <datetimepicker name="endDate" ng-model="$ctrl.game.endDate"
+                                            date-format="yyyy-MM-dd"
+                                            date-options="$ctrl.dateEndOptions"
+                                            hidden-time="true"
+                                            clear-text="Очистить"
+                                            close-text="Выбрать"
+                                            current-text="Сегодня"
+                                            datepicker-append-to-body="true" required>
+                            </datetimepicker>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label for="gameType">
+                                Тип игры <span class="text-danger">*</span> &nbsp;
+                                <span class="text-danger" ng-show="form.gameType.$error.required && (form.gameType.$touched || form.$submitted)">
+                                    - выберите тип игры
+                                </span>
+                            </label>
+                            <select name="gameType" class="form-control" required  
+                                    ng-options="gametype.name for gametype in $ctrl.gameTypes track by gametype.id"
+                                    ng-model="$ctrl.currentGameType">
+                            </select>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <label for="playground">
+                                Площадка <span class="text-danger">*</span> &nbsp;
+                                <span class="text-danger" ng-show="form.playground.$error.required && (form.playground.$touched || form.$submitted)">
+                                    - выберите площадку
+                                </span>
+                            </label>
+                            <select name="playground" class="form-control" required ng-model="$ctrl.currentPlayground"
+                                    ng-options="option.name for option in $ctrl.playgrounds track by option.id">
+                            </select>
+                        </fieldset>
+                    </div>
+                </div>
+                <fieldset class="form-group">
+                    <label for="description">
+                        Описание <span class="text-danger">*</span> &nbsp;
+                        <span class="text-danger" ng-show="form.description.$error.required && (form.description.$touched || form.$submitted)">
+                            - нужно указать описание
+                        </span>
+                    </label>
+                    <div text-angular name="description" ng-model="$ctrl.event.description"
+                         ta-text-editor-class="clearfix border-around container" ta-html-editor-class="border-around" required></div>
+                </fieldset>
+                <div class="text-right">
+                    <a class="btn btn-default" href="/app/#!/events">Отмена</a>
+                    <button ng-show="$ctrl.isCreating" class="btn btn-action" type="submit" ng-click="form.$valid ? $ctrl.proceed() : ''">Создать событие</button>
+                    <button ng-hide="$ctrl.isCreating" class="btn btn-action" type="submit" ng-click="form.$valid ? $ctrl.proceed() : ''">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

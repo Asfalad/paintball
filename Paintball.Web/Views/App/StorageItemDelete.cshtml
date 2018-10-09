@@ -1,0 +1,18 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-xs-12">
+        <header class="page-header">
+            <h1 class="page-title">Удаление оборудования "{{$ctrl.equipment.name}}"</h1>
+        </header>
+        <h3>
+            Вы действительно хотите удалить оборудование "{{$ctrl.equipment.name}}"?
+        </h3>
+        <p class="text-danger">* удаляться все заказы с данным оборудованием</p>
+        <div class="text-right">
+            <a class="btn btn-default" href="/app/#!/company/storage">Отмена</a>
+            <button class="btn btn-danger" type="button" ng-click="$ctrl.proceed()">Удалить</button>
+        </div>
+    </div>
+</div>

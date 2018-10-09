@@ -1,0 +1,1 @@
+﻿angular.module('pbCompany', ['pbResources', 'pbFilters', 'pbMain']);

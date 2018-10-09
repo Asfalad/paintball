@@ -1,0 +1,24 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-xs-12">
+        <header class="page-header">
+            <a class="btn btn-action btn-lg pull-right" href="/app/#!/news/update/{{$ctrl.news.id}}">Редактировать новость</a>
+            <h1 class="page-title pull-left">{{$ctrl.news.title}}</h1>
+            <div class="clearfix"></div>
+        </header>
+        <article class="item-single">
+            <div class="body">
+                <a ng-hide="news.titleImage" href="/app/#!/news/{{event.id}}"><img class="img-thumbnail img-responsive item-image-single pull-left" src="~/images/default.jpg" /></a>
+                <a ng-show="news.titleImage" href="/app/#!/news/{{event.id}}"><img class="img-thumbnail img-responsive item-image-single pull-left" src="{{event.titleImage}}" /></a>
+                {{$ctrl.news.text}}
+                <div class="clearfix"></div>
+                <hr />
+            </div>
+            <footer>
+                <span>Опубликовано <strong>{{$ctrl.news.publishDate | date: 'yyyy-MM-dd HH:mm'}}</strong></span>
+            </footer>
+        </article>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+﻿/* 
+	humanstxt.org 
+	The humans responsible & technology colophon
+*/
+
+/* TEAM */
+Your title: Your name.
+Twitter: your Twitter username.
+Location: Odessa, Ukraine.
+
+/* THANKS */
+Name: name or url
+
+/* SITE */
+Last update: 2017/02/20
+Standards: HTML5, CSS3

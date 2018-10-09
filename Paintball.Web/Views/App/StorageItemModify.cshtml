@@ -1,0 +1,68 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-xs-12">
+        <header class="page-header">
+            <h1 class="page-title" ng-hide="$ctrl.isCreating">Редактирование оборудования "{{$ctrl.equipment.name}}"</h1>
+            <h1 class="page-title" ng-show="$ctrl.isCreating">Создание оборудования</h1>
+        </header>
+        <div class="row">
+            <form name="form">
+                <fieldset class="form-group">
+                    <label for="name">
+                        Имя <span class="text-danger">*</span> &nbsp;
+                        <span class="text-danger" ng-show="form.name.$error.required && (form.name.$touched || form.$submitted)">
+                            - нужно указать имя
+                        </span>
+                        <span class="text-danger" ng-show="form.name.$error.maxlength && (form.name.$touched || form.$submitted)">
+                            - максимальная длина имени - 250 символов
+                        </span>
+                    </label>
+                    <input class="form-control" name="name" type="text" maxlength="250" placeholder="Введите имя..." ng-model="$ctrl.equipment.name" required />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="state">
+                        Состояние оборудования <span class="text-danger">*</span> &nbsp;
+                        <span class="text-danger" ng-show="form.state.$error.required && (form.state.$touched || form.$submitted)">
+                            - нужно ввести состояние оборудования
+                        </span>
+                        <span class="text-danger" ng-show="form.state.$error.maxlength && (form.state.$touched || form.$submitted)">
+                            - максимальная длина - 200 символов
+                        </span>
+                    </label>
+                    <input class="form-control" name="state" type="text" maxlength="200" placeholder="Введите состояние..." ng-model="$ctrl.equipment.state" required />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="count">
+                        Количество оборудования на складе <span class="text-danger">*</span> &nbsp;
+                        <span class="text-danger" ng-show="form.count.$error.required && (form.count.$touched || form.$submitted)">
+                            - нужно указать количество оборудования на складе
+                        </span>
+                        <span class="text-danger" ng-show="form.count.$error.min && (form.count.$touched || form.$submitted)">
+                            - минимальное количество - 1
+                        </span>
+                    </label>
+                    <input class="form-control" name="count" type="number" min="1" placeholder="Введите количество..." ng-model="$ctrl.equipment.count" required />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="price">
+                        Цена за единицу товара <span class="text-danger">*</span> &nbsp;
+                        <span class="text-danger" ng-show="form.price.$error.required && (form.price.$touched || form.$submitted)">
+                            - нужно указать цену
+                        </span>
+                        <span class="text-danger" ng-show="form.price.$error.min && (form.price.$touched || form.$submitted)">
+                            - минимальная цена - 0
+                        </span>
+                    </label>
+                    <input class="form-control" name="price" type="number" min="0" placeholder="Введите цену..." ng-model="$ctrl.equipment.price" required />
+                </fieldset>
+                <div class="text-right">
+                    <a class="btn btn-default" href="/app/#!/company/storage">Отмена</a>
+                    <button ng-show="$ctrl.isCreating" class="btn btn-action" type="submit" ng-click="form.$valid ? $ctrl.proceed() : ''">Создать</button>
+                    <button ng-hide="$ctrl.isCreating" class="btn btn-action" type="submit" ng-click="form.$valid ? $ctrl.proceed() : ''">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

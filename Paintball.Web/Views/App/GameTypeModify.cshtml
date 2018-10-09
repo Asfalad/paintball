@@ -1,0 +1,44 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-xs-12">
+        <header class="page-header">
+            <h1 class="page-title" ng-hide="$ctrl.isCreating">Редактирование типа игры "{{ctrl.gametype.name}}"</h1>
+            <h1 class="page-title" ng-show="$ctrl.isCreating">Создание типа игры</h1>
+        </header>
+        <div class="row">
+            <form name="form">
+                <fieldset class="form-group">
+                    <label for="name">
+                        Тип игры <span class="text-danger">*</span> &nbsp;
+                        <span class="text-danger" ng-show="form.name.$error.required && (form.name.$touched || form.$submitted)">
+                            - нужно указать тип игры
+                        </span>
+                        <span class="text-danger" ng-show="form.name.$error.maxlength && (form.name.$touched || form.$submitted)">
+                            - максимальная длина - 250 символов
+                        </span>
+                    </label>
+                    <input class="form-control" name="name" type="text" maxlength="250" placeholder="Введите имя..." ng-model="$ctrl.gametype.name" required />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="price">
+                        Цена за одну игру <span class="text-danger">*</span> &nbsp;
+                        <span class="text-danger" ng-show="form.price.$error.required && (form.price.$touched || form.$submitted)">
+                            - нужно указать цену
+                        </span>
+                        <span class="text-danger" ng-show="form.price.$error.min && (form.price.$touched || form.$submitted)">
+                            - минимальная цена - 0
+                        </span>
+                    </label>
+                    <input class="form-control" name="price" type="number" min="0" placeholder="Введите цену..." ng-model="$ctrl.gametype.price" required />
+                </fieldset>
+                <div class="text-right">
+                    <a class="btn btn-default" href="/app/#!/company/gametypes">Отмена</a>
+                    <button ng-show="$ctrl.isCreating" class="btn btn-action" type="submit" ng-click="form.$valid ? $ctrl.proceed() : ''">Создать</button>
+                    <button ng-hide="$ctrl.isCreating" class="btn btn-action" type="submit" ng-click="form.$valid ? $ctrl.proceed() : ''">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

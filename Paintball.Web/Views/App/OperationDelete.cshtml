@@ -1,0 +1,18 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-xs-12">
+        <header class="page-header">
+            <h1 class="page-title">Удаление операции</h1>
+        </header>
+        <h3>
+            Вы действительно хотите удалить эту операцию?
+        </h3>
+        <p class="text-danger">* вместе с этой операцией удалиться и связанное действие</p>
+        <div class="text-right">
+            <a class="btn btn-default" href="/app/#!/company/operations">Отмена</a>
+            <button class="btn btn-danger" type="button" ng-click="$ctrl.proceed()">Удалить</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-xs-12">
+        <header class="page-header">
+            <h1 class="page-title">Удаление новости "{{$ctrl.news.title}}"</h1>
+        </header>
+        <h3>
+            Вы действительно хотите удалить эту новость?
+        </h3>
+        <div class="text-right">
+            <a class="btn btn-default" href="/app/#!/news">Отмена</a>
+            <button class="btn btn-danger" type="button" ng-click="$ctrl.proceed()">Удалить</button>
+        </div>
+    </div>
+</div>

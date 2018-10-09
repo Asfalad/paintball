@@ -1,0 +1,89 @@
+﻿@{
+    Layout = null;
+}
+<div class="row">
+    <div class="col-xs-12">
+        <header class="page-header">
+            <h1 class="page-title" ng-hide="$ctrl.isCreating">Редактирование сертификата</h1>
+            <h1 class="page-title" ng-show="$ctrl.isCreating">Создание сертификата</h1>
+        </header>
+        <div class="row">
+            <form name="form">
+                <fieldset class="form-group">
+                    <label for="firstName">
+                        Имя <span class="text-danger">*</span> &nbsp;
+                        <span class="text-danger" ng-show="form.firstName.$error.required && (form.firstName.$touched || form.$submitted)">
+                            - нужно указать имя
+                        </span>
+                        <span class="text-danger" ng-show="form.firstName.$error.maxlength && (form.firstName.$touched || form.$submitted)">
+                            - максимальная длина имени - 250 символов
+                        </span>
+                    </label>
+                    <input class="form-control" name="firstName" type="text" maxlength="250" placeholder="Введите имя..." ng-model="$ctrl.certificate.firstName" required />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="lastName">
+                        Фамилия <span class="text-danger">*</span> &nbsp;
+                        <span class="text-danger" ng-show="form.lastName.$error.required && (form.lastName.$touched || form.$submitted)">
+                            - нужно указать Фамилию
+                        </span>
+                        <span class="text-danger" ng-show="form.lastName.$error.maxlength && (form.lastName.$touched || form.$submitted)">
+                            - максимальная длина фамилии - 250 символов
+                        </span>
+                    </label>
+                    <input class="form-control" name="lastName" type="text" maxlength="250" placeholder="Введите фамилию..." ng-model="$ctrl.certificate.lastName" required />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="middleName">
+                        Отчество
+                        <span class="text-danger" ng-show="form.middleName.$error.maxlength && (form.middleName.$touched || form.$submitted)">
+                            - максимальная длина адресса - 250 символов
+                        </span>
+                    </label>
+                    <input class="form-control" name="middleName" type="text" maxlength="250" placeholder="Введите отчество..." ng-model="$ctrl.certificate.middleName" />
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="endDate">
+                        Дата окончания сертификата <span class="text-danger">*</span>
+                        <span class="text-danger" ng-show="form.endDate.$error.required && (form.endDate.$touched || form.$submitted)">
+                            - нужно указать дату
+                        </span>
+                        <span class="text-danger" ng-show="form.endDate.$error.min && (form.endDate.$touched || form.$submitted)">
+                            - дата должна быть больше текущей
+                        </span>
+                        <span class="text-danger" ng-show="form.endDate.$error.date && (form.endDate.$touched || form.$submitted)">
+                            - дата должна быть в формате yyyy-MM-dd (год-месяц-день)
+                        </span>
+                    </label>
+                    <datetimepicker ng-model="$ctrl.certificate.endDate"
+                                    date-format="yyyy-MM-dd"
+                                    date-options="$ctrl.dateOptions"
+                                    hidden-time="true"
+                                    clear-text="Очистить"
+                                    close-text="Выбрать"
+                                    current-text="Сегодня"
+                                    datepicker-append-to-body="true">
+                    </datetimepicker>
+                </fieldset>
+                <input type="hidden" name="startDate" ng-model="$ctrl.certificate.startDate" value="{{$ctrl.certificate.startDate | date: 'yyyy-MM-dd'}}" />
+                <fieldset class="form-group">
+                    <label for="price">
+                        Стоимость сертификата <span class="text-danger">*</span>
+                        <span class="text-danger" ng-show="form.price.$error.required && (form.price.$touched || form.$submitted)">
+                            - нужно указать цену
+                        </span>
+                        <span class="text-danger" ng-show="form.price.$error.min && (form.price.$touched || form.$submitted)">
+                            - цена должна быть больше или равна 0
+                        </span>
+                    </label>
+                    <input class="form-control" name="price" type="number" min="0" placeholder="Введите стоимость сертификата..." ng-model="$ctrl.certificate.price" required />
+                </fieldset>
+                <div class="text-right">
+                    <a class="btn btn-default" href="/app/#!/company/certificates">Отмена</a>
+                    <button ng-show="$ctrl.isCreating" class="btn btn-action" type="submit" ng-click="form.$valid ? $ctrl.proceed() : ''">Создать сертификат</button>
+                    <button ng-hide="$ctrl.isCreating" class="btn btn-action" type="submit" ng-click="form.$valid ? $ctrl.proceed() : ''">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

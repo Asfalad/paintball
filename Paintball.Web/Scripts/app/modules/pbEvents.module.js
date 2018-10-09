@@ -1,0 +1,1 @@
+﻿angular.module('pbEvents', ['pbResources', 'pbFilters', 'pbMain']);
